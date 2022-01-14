@@ -8,7 +8,7 @@ export const resolvers: IResolvers = {
     },
   },
   Mutation: {
-    deleteListing: (_root: undefined, { id }: { id: string }) => {
+    deleteListing: (_parent: undefined, { id }: { id: string }) => {
       for (let i = 0; i < listings.length; i++) {
         if (listings[i].id === id) {
           return listings.splice(i, 1)[0];
