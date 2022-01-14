@@ -1,10 +1,11 @@
 import { MongoClient } from 'mongodb';
+import { Database, Listing } from '../lib/types';
 
 const user = 'admin';
 const password = 'fuckoff';
 const url = `mongodb+srv://${user}:${password}@cluster0.oqarn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
-export const connectDatabase = async () => {
+export const connectDatabase = async (): Promise<Database> => {
   const client = new MongoClient(url);
 
   try {
@@ -14,7 +15,7 @@ export const connectDatabase = async () => {
     console.log('Connected to Atlas...');
 
     return {
-      listings: db.collection('listings'),
+      listings: db.collection<Listing>('listings'),
     };
   } catch (e) {
     throw new Error(`Unable to connect: ${e}`);
